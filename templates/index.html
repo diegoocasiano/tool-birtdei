@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Tools - Birtdei</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Onest:wght@100..900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="/static/css/index.css">
+    <script src="/static/js/index.js"></script>
+</head>
+<body>
+    <main>
+        <img src="/static/img/memoji-party.webp" alt="">
+        <h1>Send birthday email</h1>
+        <form action="/send_birthday_emails" method="post" onsubmit="showLoader()">
+            <button id="sendButton" type="submit">
+                Send emails
+            </button>
+        </form>
+    </main>
+</body>
+</html>
