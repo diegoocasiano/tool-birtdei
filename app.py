@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import Mail
 from pyairtable import Api
