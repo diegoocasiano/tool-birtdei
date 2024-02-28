@@ -14,7 +14,7 @@ load_dotenv('.env')
 #API Key de SendGrid
 sg = SendGridAPIClient(os.environ.get('SENDGRID_API_KEY'))
 
-#API Key & Settings de Airtable
+#API Key & settings de Airtable
 airtableApi = Api(os.environ.get('AIRTABLE_API_KEY'))
 BASE_ID = 'appDTSitS55x2wF94'
 TABLE_NAME = 'table-test1'
