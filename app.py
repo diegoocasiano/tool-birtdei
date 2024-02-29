@@ -2,6 +2,7 @@ import os
 from flask import Flask, render_template, request
 from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import Mail
+from sendgrid.helpers.mail import Asm
 from pyairtable import Api
 from datetime import datetime
 from dotenv import load_dotenv
@@ -16,8 +17,8 @@ sg = SendGridAPIClient(os.environ.get('SENDGRID_API_KEY'))
 
 #API Key & settings de Airtable
 airtableApi = Api(os.environ.get('AIRTABLE_API_KEY'))
-BASE_ID = 'appDTSitS55x2wF94'
-TABLE_NAME = 'table-test1'
+BASE_ID = 'apps6RTIL11SBA533'
+TABLE_NAME = 'Users Waitlist'
 table = airtableApi.table(BASE_ID, TABLE_NAME)
 
 # Obtén el HTML del correo
@@ -55,20 +56,30 @@ def send_birthday_emails():
             from_email=("casiano@birtdei.com", "Diego de Birtdei"),
             to_emails=user['fields']['Email'],
             
-            subject='Es hoy! Feliz cumple!🎁👀!',
-            html_content=html_content
+            subject='Es hoy! Feliz cumple! 🎁👀',
+            html_content=html_content,
         )
+        # Configuración de SendGrid para el manejo de cancelación de suscripción (Unsubscribe)
+        asm = Asm(group_id=26119, groups_to_display=[26119])
+        message.asm = asm
         response = sg.send(message)
 
         # Agregar el correo electrónico a la lista de correos enviados
         sent_emails.append(user['fields']['Email'])
     
     # Datos para pasar al template HTML
-    data = {
-        'date': today,
-        'sent_emails': sent_emails,
-        'num_emails_sent': len(sent_emails)
-    }
+    if len(sent_emails) > 0:
+        data = {
+            'date': today,
+            'sent_emails': sent_emails,
+            'num_emails_sent': len(sent_emails)
+        }
+    else:
+        data = {
+            'date': today,
+            'sent_emails': "Ningún usuario cumple años hoy :/",
+            'num_emails_sent': 0
+        }
 
     return render_template('result.html', data=data)
 
