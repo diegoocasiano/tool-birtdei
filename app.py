@@ -60,8 +60,8 @@ def send_birthday_emails():
             html_content=html_content,
         )
         # Configuración de SendGrid para el manejo de cancelación de suscripción (Unsubscribe)
-        asm = Asm(group_id=26119, groups_to_display=[26119])
-        message.asm = asm
+        # asm = Asm(group_id=26119, groups_to_display=[26119])
+        # message.asm = asm
         response = sg.send(message)
 
         # Agregar el correo electrónico a la lista de correos enviados
