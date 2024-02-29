@@ -55,7 +55,7 @@ def send_birthday_emails():
             from_email=("casiano@birtdei.com", "Diego de Birtdei"),
             to_emails=user['fields']['Email'],
             
-            subject='¡Feliz cumpleaños!',
+            subject='Es hoy! Feliz cumple!🎁👀!',
             html_content=html_content
         )
         response = sg.send(message)
