@@ -15,16 +15,13 @@
 <body>
     <h1>Results of the emails sent</h1>
     <p>Current date: {{ data['date'] }}</p>
-    {% if data['sent_emails'] == "Ningún usuario cumple años hoy :/" %}
-        <p class="no-emails">{{ data['sent_emails'] }}</p>
-    {% else %}
-        <p>Sent emails ({{ data['num_emails_sent'] }}) :</p>
-        <ul>
-            {% for email in data['sent_emails'] %}
-                <li>{{ email }}</li>
-            {% endfor %}
-        </ul>
-    {% endif %}
+    <p>{{ data['message'] }}</p>
+    <p>({{ data['num_emails_sent'] }}) :</p>
+    <ul>
+        {% for email in data['sent_emails'] %}
+            <li>{{ email }}</li>
+        {% endfor %}
+    </ul>
     <a href="/">back</a>
     
 </body>
