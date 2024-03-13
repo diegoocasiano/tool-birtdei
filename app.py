@@ -41,7 +41,7 @@ def index():
 @app.route('/send_birthday_emails', methods=['POST'])
 def send_birthday_emails():
     #Obtener la fecha actual cada vez que se presione el botón
-    today = datetime.now().strftime('%Y-%m-%d')
+    today = datetime.now().strftime('%m-%d')
     print(f"Fecha actual obtenida: {today}")
 
     all_records = table.all()
@@ -51,9 +51,8 @@ def send_birthday_emails():
     # Variable para rastrear si ocurrió un error
     error_occurred = False
 
-    # Filtrar los registros para obtener los usuarios que cumplen años hoy
-    birthday_users = [record for record in all_records if record.get('fields', {}).get('Birthday') == today]
-
+    # Filtrar los registros para obtener los usuarios que cumplen años hoy. Se usa split('-') para convertir el formato de birthday a  ['AAAA', 'MM', 'DD'] y luego [1:] para ignorar el año y obtener solo['MM', 'DD'].
+    birthday_users = [record for record in all_records if record.get('fields', {}).get('Birthday', '').split('-')[1:] == today.split('-')]
     
     for user in birthday_users:
         message = Mail(
