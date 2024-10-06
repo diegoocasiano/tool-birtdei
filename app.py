@@ -38,7 +38,7 @@ with open('email-birthday.html', 'r') as file:
 @app.route('/')
 def index():
     sapo_value = request.args.get('sapo')
-    if sapo_value != "123":
+    if sapo_value != "135":
         abort(403)
 
     return render_template('index.html', sapo_value=sapo_value)
