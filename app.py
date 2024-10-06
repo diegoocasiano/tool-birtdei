@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, abort
 from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import Mail
 
@@ -34,9 +34,14 @@ table = airtableApi.table(BASE_ID, TABLE_NAME)
 with open('email-birthday.html', 'r') as file:
     html_content = file.read()
 
+
 @app.route('/')
 def index():
-    return render_template('index.html')
+    sapo_value = request.args.get('sapo')
+    if sapo_value != "123":
+        abort(403)
+
+    return render_template('data.html', sapo_value=sapo_value)
 
 @app.route('/send_birthday_emails', methods=['POST'])
 def send_birthday_emails():
